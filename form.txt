@@ -1,0 +1,208 @@
+{
+  "mate" : {
+    	"values": {
+        "name": "",
+        "region": "",
+        "date": "",
+        "time": "",
+        "delivery": false,
+        "type": [],
+        "resource": "",
+        "desc": "",
+        "name2": "",
+        "region2": "",
+        "date2": "",
+        "time2": "",
+        "delivery2": false,
+        "type2": [],
+        "resource2": "",
+        "desc2": ""
+      },
+  		"fields" : [
+    		{
+    			"holder"      :"text",
+    			"name"        :"name",
+    			"label"       :"活动名称",
+    			"placeholder" :"请输入活动名称"
+    		},
+    		{
+    			"holder"      :"select",
+    			"name"        :"region",
+    			"label"       :"活动区域",
+    			"placeholder" :"请选择活动区域",
+    			"options"     :[
+    				{
+    					"label"   :"区域一",
+    					"value"   :"shanghai"
+    				},{
+    					"label"   :"区域二",
+    					"value"   :"beijing"
+    				}
+    			]
+    		},
+    		{
+    			"holder"      :"date",
+    			"name"        :"date",
+    			"label"       :"活动日期",
+    			"placeholder" :"选择日期"
+    		},
+    		{
+    			"holder"      :"time",
+    			"name"        :"time",
+    			"label"       :"活动时间",
+    			"placeholder" :"选择时间"
+    		},
+    		{
+    			"holder"      :"switch",
+    			"name"        :"delivery",
+    			"label"       :"即时配送",
+    			"on"          :"开",
+    			"off"         :"关"
+    		},
+    		{
+    			"holder"      :"checkbox",
+    			"name"        :"type",
+    			"label"       :"活动性质",
+    			"options"     :[
+    				{
+    					"label"   :"美食/餐厅线上活动",
+    					"value"   :"shanghai"
+    				},{
+    					"label"   :"地推活动",
+    					"value"   :"beijing"
+    				},{
+    					"label"   :"线下主题活动",
+    					"value"   :"nanjing"
+    				},{
+    					"label"   :"单纯品牌曝光",
+    					"value"   :"tianjing"
+    				}
+    			]
+    		},
+    		{
+    			"holder"      :"radio",
+    			"name"        :"resource",
+    			"label"       :"特殊资源",
+    			"options"     :[
+    				{
+    					"label"   :"线上品牌商赞助",
+    					"value"   :"shanghai"
+    				},{
+    					"label"   :"线下场地免费",
+    					"value"   :"beijing"
+    				}
+    			]
+    		},
+    		{
+    			"holder"      :"textarea",
+    			"name"        :"desc",
+    			"label"       :"活动形式"
+    		},
+        {
+          "holder"      :"text",
+          "name"        :"name2",
+          "label"       :"活动名称",
+          "placeholder" :"请输入活动名称"
+        },
+        {
+          "holder"      :"select",
+          "name"        :"region2",
+          "label"       :"活动区域",
+          "placeholder" :"请选择活动区域",
+          "options"     :[
+            {
+              "label"   :"区域一",
+              "value"   :"shanghai"
+            },{
+              "label"   :"区域二",
+              "value"   :"beijing"
+            }
+          ]
+        },
+        {
+          "holder"      :"date",
+          "name"        :"date2",
+          "label"       :"活动日期",
+          "placeholder" :"选择日期"
+        },
+        {
+          "holder"      :"time",
+          "name"        :"time2",
+          "label"       :"活动时间",
+          "placeholder" :"选择时间"
+        },
+        {
+          "holder"      :"switch",
+          "name"        :"delivery2",
+          "label"       :"即时配送",
+          "on"          :"开",
+          "off"         :"关"
+        },
+        {
+          "holder"      :"checkbox",
+          "name"        :"type2",
+          "label"       :"活动性质",
+          "options"     :[
+            {
+              "label"   :"美食/餐厅线上活动",
+              "value"   :"shanghai"
+            },{
+              "label"   :"地推活动",
+              "value"   :"beijing"
+            },{
+              "label"   :"线下主题活动",
+              "value"   :"nanjing"
+            },{
+              "label"   :"单纯品牌曝光",
+              "value"   :"tianjing"
+            }
+          ]
+        },
+        {
+          "holder"      :"radio",
+          "name"        :"resource2",
+          "label"       :"特殊资源",
+          "options"     :[
+            {
+              "label"   :"线上品牌商赞助",
+              "value"   :"shanghai"
+            },{
+              "label"   :"线下场地免费",
+              "value"   :"beijing"
+            }
+          ]
+        },
+        {
+          "holder"      :"textarea",
+          "name"        :"desc2",
+          "label"       :"活动形式"
+        }
+  	  ],
+  	  "rules": {
+  	    "name": [
+  	      { "required": true, "message": "请输入活动名称", "trigger": "blur" },
+  	      { "min": 3, "max": 5, "message": "长度在 3 到 5 个字符", "trigger": "blur" }
+  	    ],
+  	    "region": [
+  	      { "required": true, "message": "请选择活动区域", "trigger": "change" }
+  	    ],
+  	    "date": [
+  	      { "type": "date", "required": true, "message": "请选择日期", "trigger": "change" }
+  	    ],
+  	    "time": [
+  	      { "type": "date", "required": true, "message": "请选择时间", "trigger": "change" }
+  	    ],
+  	    "type": [
+  	      { "type": "array", "required": true, "message": "请至少选择一个活动性质", "trigger": "change" }
+  	    ],
+  	    "resource": [
+  	      { "required": true, "message": "请选择活动资源", "trigger": "change" }
+  	    ],
+  	    "desc": [
+  	      { "required": true, "message": "请填写活动形式", "trigger": "blur" }
+  	    ]
+  	  }
+  },
+  "title" : "表单中心",
+  "currentView" : "Formor"
+}

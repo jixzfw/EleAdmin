@@ -1,0 +1,128 @@
+{
+  "mate" : {
+    "columns" : [
+      {
+        "label":"姓名",
+        "name" :"name",
+        "width":"120"
+      },{
+        "label":"生日",
+        "name" :"date",
+        "width":"120"
+      },{
+        "label":"家庭住址",
+        "name" :"address"
+      }
+    ],
+    "rows"  : [
+      {
+    	  "id":1,
+        "date": "2016-05-03",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":2,
+        "date": "2016-05-02",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":3,
+        "date": "2016-05-04",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":4,
+        "date": "2016-05-01",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":5,
+        "date": "2016-05-08",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":6,
+        "date": "2016-05-06",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }, {
+        "id":7,
+        "date": "2016-05-07",
+        "name": "王小虎",
+        "address": "上海市普陀区金沙江路 1518 弄"
+      }
+    ],
+    "btns" :[
+    	{
+    		"action":"add",
+    		"url"      : "/form.txt",
+    		"label"    : "增加元素",
+    		"type"     : "success",
+    		"isApi"    : false,
+    		"useId"    : -1,
+    		"disabled" : false
+    	},
+    	{
+    		"action"   :"disableSelected",
+    		"label"    : "禁用元素",
+    		"url"      : "/form.txt",
+    		"type"     : "warning",
+    		"isApi"    : true,
+    		"useId"    : 1,
+    		"disabled" : true
+    	},
+    	{
+    		"action"   :"deleteSelected",
+    		"label"    : "删除元素",
+    		"url"      : "/form.txt",
+    		"type"     : "danger",
+    		"isApi"    : true,
+    		"useId"    : 1,
+    		"disabled" : true
+    	}
+    ],
+    "actions" :[
+    	{
+    		"action":"edit",
+    		"url"   : "/form.txt",
+    		"label" : "修改",
+    		"type"  : "success",
+    		"isApi" : false,
+    		"useId" : 0
+    	},
+    	{
+    		"action":"disable",
+    		"label" : "禁用",
+    		"url"   : "/form.txt",
+    		"type"  : "warning",
+    		"isApi" : true,
+    		"useId" : 0
+    	},
+    	{
+    		"action":"delete",
+    		"label" : "删除",
+    		"url"   : "/form.txt",
+    		"type"  : "danger",
+    		"isApi" : true,
+    		"useId" : true,
+    		"useId" : 0
+    	},
+    	{
+    		"action":"action",
+    		"label" : "绑定",
+    		"url"   : "/form.txt",
+    		"type"  : "primary",
+    		"isApi" : false,
+    		"useId" : 0
+    	}
+    ],
+    "disable":false,
+		"delete" :true,
+		"edit"   :true,
+    "addjson":"/form.txt",
+    "page"  : 1,
+    "total" : 40
+  },
+  "title": "表格中心",
+  "currentView" : "Tabler"
+}

@@ -1,0 +1,40 @@
+{
+  "title":"JPHP-ELEMENT管理后台",
+	"menus": [
+		{
+			"index" : "1",  "title" : "文章中心",
+			"submenus" : [
+				{
+					"index" : "1",  "title" : "栏目AA","url":"/table.txt"
+				},{
+					"index" : "2",  "title" : "栏目BB","url":"/form.txt"
+				},{
+					"index" : "3",  "title" : "栏目CC","url":"/table.txt"
+				}
+			]
+		},{
+			"index" : "2",  "title" : "栏目管理",
+			"submenus" : [
+				{
+					"index" : "1",  "title" : "增加栏目"
+				},{
+					"index" : "2",  "title" : "栏目设置"
+				}
+			]
+		},{
+			"index" : "3",  "title" : "用户中心",
+			"submenus" : [
+				{
+					"index" : "1",  "title" : "权限管理"
+				},{
+					"index" : "2",  "title" : "角色管理"
+				},{
+					"index" : "3",  "title" : "用户管理"
+				}
+			]
+		},{
+			"index" : "4",  "title" : "订单管理"
+		}
+	],
+	"current": 1
+}
