@@ -126,4 +126,14 @@
 
 ```
 
-##结束
+##使用方法
+
+git clone git@git.oschina.net:bfgdqch/EleAdmin.git
+
+cd EleAdmin
+
+npm install
+
+npm run dev
+
+浏览器中看效果 http://localhost:8080
