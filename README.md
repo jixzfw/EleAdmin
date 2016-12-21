@@ -43,131 +43,87 @@
 ```
 
 {
-  "mate" : {
-    "columns" : [
+  "mate" : {//渲染定义
+    "columns" : [//列定义
       {
-        "label":"姓名",
+        "label":"姓名", 
         "name" :"name",
         "width":"120"
-      },{
-        "label":"生日",
-        "name" :"date",
-        "width":"120"
-      },{
-        "label":"家庭住址",
-        "name" :"address"
-      }
+      }//,{}...
     ],
-    "rows"  : [
+    "rows"  : [//数据定义
       {
-          "id":1,
+        "id":1,
         "date": "2016-05-03",
         "name": "王小虎",
         "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":2,
-        "date": "2016-05-02",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":3,
-        "date": "2016-05-04",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":4,
-        "date": "2016-05-01",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":5,
-        "date": "2016-05-08",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":6,
-        "date": "2016-05-06",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }, {
-        "id":7,
-        "date": "2016-05-07",
-        "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
-      }
+      }//, {}
     ],
-    "btns" :[
+    "btns" :[//表格顶部按钮定义
         {
-            "action":"add",
+            "action"   :"add",
             "url"      : "/form.txt",
             "label"    : "增加元素",
             "type"     : "success",
-            "isApi"    : false,
-            "useId"    : -1,
-            "disabled" : false
-        },
-        {
-            "action"   :"disableSelected",
-            "label"    : "禁用元素",
-            "url"      : "/form.txt",
-            "type"     : "warning",
-            "isApi"    : true,
-            "useId"    : 1,
-            "disabled" : true
-        },
-        {
-            "action"   :"deleteSelected",
-            "label"    : "删除元素",
-            "url"      : "/form.txt",
-            "type"     : "danger",
-            "isApi"    : true,
-            "useId"    : 1,
-            "disabled" : true
-        }
+            "isApi"    : false,    //重新读取数据还是重新渲染
+            "useId"    : -1,  // -1 不用， 0 当前行，1 选中行
+            "disabled" : false  //复选框0选中时是否禁用
+        }//,{}
     ],
-    "actions" :[
+    "actions" :[//行按钮
         {
             "action":"edit",
             "url"   : "/form.txt",
             "label" : "修改",
             "type"  : "success",
             "isApi" : false,
-            "useId" : 0
-        },
-        {
-            "action":"disable",
-            "label" : "禁用",
-            "url"   : "/form.txt",
-            "type"  : "warning",
-            "isApi" : true,
-            "useId" : 0
-        },
-        {
-            "action":"delete",
-            "label" : "删除",
-            "url"   : "/form.txt",
-            "type"  : "danger",
-            "isApi" : true,
-            "useId" : true,
-            "useId" : 0
-        },
-        {
-            "action":"action",
-            "label" : "绑定",
-            "url"   : "/form.txt",
-            "type"  : "primary",
-            "isApi" : false,
-            "useId" : 0
-        }
+            "useId" : 0 
+        }//,{}
     ],
-    "disable":false,
-        "delete" :true,
-        "edit"   :true,
-    "addjson":"/form.txt",
-    "page"  : 1,
-    "total" : 40
+    "page"  : 1, //当前页
+    "total" : 40  // 数据总条数
   },
   "title": "表格中心",
-  "currentView" : "Tabler"
+  "currentView" : "Tabler" //渲染格式
 }
 ```
+###表单结构
+```
+
+{
+  "mate" : {
+    "values": {//默认值
+        "name": ""//,...
+    
+    },
+    "fields" : [//域定义
+            {
+                "holder"      :"select",//参见Element组件
+                "name"        :"name",
+                "label"       :"活动区域",
+                "placeholder" :"请选择活动区域",
+                "options"     :[ //如果有的话
+                    {
+                        "label"   :"区域一",
+                        "value"   :"shanghai"
+                    },{
+                        "label"   :"区域二",
+                        "value"   :"beijing"
+                    }
+                ]
+            }//,{}
+        ],
+        "rules": {//验证规则
+          "name": [
+            { "required": true, "message": "请输入活动名称", "trigger": "blur" },
+            { "min": 3, "max": 5, "message": "长度在 3 到 5 个字符", "trigger": "blur" }
+          ]//, ...
+        }
+  },
+  "title" : "表单中心",
+  "currentView" : "Formor" //渲染格式
+}
+
+```
+
+##结束
