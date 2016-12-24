@@ -201,7 +201,8 @@
   	    "desc": [
   	      { "required": true, "message": "请填写活动形式", "trigger": "blur" }
   	    ]
-  	  }
+  	  },
+      "labelWidth" :"100px"
   },
   "title" : "表单中心",
   "currentView" : "Formor"

@@ -4,11 +4,13 @@
       {
         "label":"姓名",
         "name" :"name",
-        "width":"120"
+        "width":"120",
+        "sortable" : true
       },{
         "label":"生日",
         "name" :"date",
-        "width":"120"
+        "width":"120",
+        "sortable" : "custom"
       },{
         "label":"家庭住址",
         "name" :"address"
@@ -73,6 +75,9 @@
     	},
     	{
     		"action"   :"deleteSelected",
+        "confirm": {
+          "msg" : "确定删除选中数据？"
+        },
     		"label"    : "删除元素",
     		"url"      : "/form.txt",
     		"type"     : "danger",
@@ -99,13 +104,15 @@
     		"useId" : 0
     	},
     	{
-    		"action":"delete",
-    		"label" : "删除",
-    		"url"   : "/form.txt",
-    		"type"  : "danger",
-    		"isApi" : true,
-    		"useId" : true,
-    		"useId" : 0
+    		"action" : "delete",
+        "confirm": {
+          "msg" : "确定删除本条数据？"
+        },
+    		"label"  : "删除",
+    		"url"    : "/form.txt",
+    		"type"   : "danger",
+    		"isApi"  : true,
+    		"useId"  : 0
     	},
     	{
     		"action":"action",
@@ -116,12 +123,46 @@
     		"useId" : 0
     	}
     ],
-    "disable":false,
-		"delete" :true,
-		"edit"   :true,
-    "addjson":"/form.txt",
-    "page"  : 1,
-    "total" : 40
+    "search" : {
+      "values": {
+        "name": "",
+        "region" : ""
+      },
+      "fields" : [
+        {
+          "holder"      :"text",
+          "name"        :"name",
+          "placeholder" :"请输入活动名称"
+        },
+        {
+          "holder"      :"select",
+          "name"        :"region",
+          "placeholder" :"请选择活动区域",
+          "options"     :[
+            {
+              "label"   :"区域一",
+              "value"   :"shanghai"
+            },{
+              "label"   :"区域二",
+              "value"   :"beijing"
+            }
+          ]
+        }
+      ],
+      "rules": {
+        "name": [
+          { "required": true, "message": "请输入活动名称", "trigger": "blur" },
+          { "min": 3, "max": 5, "message": "长度在 3 到 5 个字符", "trigger": "blur" }
+        ],
+        "region": [
+          { "required": true, "message": "请选择活动区域", "trigger": "change" }
+        ]
+      },
+      "inline" : true
+    },
+    "dataApi" : "/data",
+    "page"    : 1,
+    "total"   : 40
   },
   "title": "表格中心",
   "currentView" : "Tabler"

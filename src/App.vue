@@ -29,28 +29,31 @@
           </template>
         </el-menu>
       </el-col>
-      <router-view></router-view>
+      <el-col :span="20" class="main">
+        <h1>{{caption}}</h1>
+        <div class="main-block">
+          <router-view v-on:update="onUpdate"></router-view>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
-
 <script>
 
 
 export default {
   data () {
     return {
-      title:'',
+      title  : '',
       menus  : [],
-      slider : []
+      slider : [],
+      caption: '管理页面'
     }
-  },
-  components: {
   },
   created: function () {
     //获取管理页面框架信息[标题、菜单列表、管理员信息]
     this.$http.get(window.bench).then((response) => {
-    	var data = JSON.parse(response.body);
+    	let data = JSON.parse(response.body);
     	this.title = data.title;
     	this.menus = data.menus;
     	this.slider =  this.menus[0].submenus;
@@ -69,6 +72,9 @@ export default {
         var url = window.jsonPath+index;
         router.push({ path: index, query: { url: url }})
       }
+    },
+    onUpdate:function(val){
+      this.caption = val;
     }
   }
 }
@@ -96,27 +102,13 @@ body {
     display: block;
 }
 .main {
-	margin-left:220px;
-	margin-top: 20px;
+  margin-left:220px;
+  margin-top: 20px;
 }
 .main-block {
     border: 1px solid #eaeefb;
     border-radius: 4px;
     transition: .2s;
     margin-bottom: 24px;
-}
-.main-block .search {
-    padding: 24px;
-    padding-bottom: 0;
-}
-.main-block .box {
-    background-color: #f9fafc;
-    border-top: 1px solid #eaeefb;
-    clear: both;
-    overflow: hidden;
-    transition: height .2s;
-}
-.page {
-	margin-top: 20px;
 }
 </style>

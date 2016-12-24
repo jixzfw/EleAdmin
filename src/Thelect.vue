@@ -36,13 +36,13 @@
 <script>
   export default {
   	props: {
-		options:Array
+		  options:Array
   	},
     data() {
       return {
-		subs1 : [],
-		subs2 : [],
-        value: ''
+		    subs1 : [],
+		    subs2 : [],
+        value : ''
       }
     }
   }

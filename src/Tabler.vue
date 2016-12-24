@@ -1,17 +1,18 @@
 <template>
   <div class="box">
     <el-row>
-      <div class="block">
+      <div class="btnblock">
         <el-col :span="2" v-for="btn of mate.btns">
           <el-button v-if="btn.disabled" :plain="true" :type="btn.type" @click="handleAction(btn)" :disabled="btnDisable">{{btn.label}}</el-button>
           <el-button v-else :plain="true" :type="btn.type" @click="handleAction(btn)">{{btn.label}}</el-button>
         </el-col>
+        <el-col :span="18"><Formor :mate="mate.search" v-if="mate.search" v-on:ajax="ajaxDate"></Formor></el-col>
       </div>
     </el-row>
     <el-row><el-col :span="24">
-      <el-table :data="mate.rows" border  @selection-change="handleSelectionChange" style="width: 100%">
+      <el-table :data="mate.rows" border  @selection-change="handleSelectionChange" @sort-change="sortChange">
           <el-table-column type="selection" width="50"></el-table-column>
-          <el-table-column v-for="col of mate.columns" :label="col.label" :prop="col.name" :width="col.width"></el-table-column>
+          <el-table-column v-for="col of mate.columns" :label="col.label" :prop="col.name" :width="col.width" :sortable="col.sortable"></el-table-column>
           <el-table-column :context="_self" inline-template label="操作" width="300">
             <div>
               <el-button v-for="act of mate.actions"
@@ -39,6 +40,11 @@
 
 <script>
 export default {
+  components: {
+    Formor: function index(resolve) {
+      require(['./Formor.vue'], resolve);
+    }
+  },
 	props: {
 		mate:Object
   },
@@ -61,21 +67,31 @@ export default {
     },
     handleCurrentChange(val) {
       let url = this.mate.dataApi+"/page/"+val;
-      router.push({ query: { url: url }});
+      this.ajaxDate(url);
     },
     handleAction(act,row={}) {
+      var vm = this;
+      if(act.confirm){
+        this.handleConfirm(act.confirm,function(){
+          vm.action(act,row);
+        });
+      }else{
+        this.action(act,row);
+      }
+    },
+    action(act,row){
       if(act.isApi){
         let id = (act.useId === 0)?row.id:this.multipleSelection.map((row) => row.id);
         console.log("api:"+act.url+";id:"+id);
-        //this.postOption(id,this.mate.delApi);
+        this.ajaxDate(act.url,{id:id});
       }else if(act.useId === -1){
         let url = act.url;
         console.log("jumpto"+url);
-        //router.push({ query: { url: url }});
+        router.push({ query: { url: url }});
       }else{
         let url = act.url+"/id/"+row.id;
         console.log("jumpto"+url);
-        //router.push({ query: { url: url }});
+        router.push({ query: { url: url,id:row.id }});
       }
     },
     handleConfirm(config,func){
@@ -90,40 +106,41 @@ export default {
         });          
       });
     },
-    
-   //  optionDelete(id){
-   //  	this.handleConfirm({
-   //    	msg:'此操作将永久删除该条数据, 是否继续?'
-   //    },() => {
-   //    	//发送删除信号
-			// 	this.postOption(id,this.mate.delApi);
-   //    });
-   //  },
-   //  optionDisable(id){
-			// this.postOption(id,this.mate.disableApi);
-   //  },
-    postOption(id,url){
-    	this.$http.post(url, {id: id}).then((response) => {
-    			this.$notify.info({
-    		    title: '消息',
-    		    message: '操作完成'
-    		  });
-    		  this.$emit('refresh');
-    		  console.log(response.body);
-			    // get status
-			    //response.status;
-			    // get status text
-			    //response.statusText;
-			    // get 'Expires' header
-			    //response.headers.get('Expires');
-			    // set data on vm
-			    //this.$set('someData', response.body);
+    ajaxDate(url,param={}){
+      if(url == null){
+        url = this.mate.dataApi;
+      }
+    	this.$http.post(url,param).then((response) => {
+  			this.$notify.info({
+  		    title: '消息',
+  		    message: '操作完成'
+  		  });
+        let data = JSON.parse(response.body);
+        this.rows = data.rows;
+		    // get status
+		    //response.status;
+		    // get status text
+		    //response.statusText;
+		    // get 'Expires' header
+		    //response.headers.get('Expires');
+		    // set data on vm
+		    //this.$set('someData', response.body);
 		  }, (response) => {
 		    this.$notify.error({
     		  title: '消息',
-    		  message: '操作失败'
+    		  message: '刷新数据失败'
     		});
 		  });
+    },
+    sortChange : function(sort){
+      console.log(sort.column.label);
+      console.log(sort.prop);
+      this.ajaxDate(null,{
+        column : sort.column.lable,
+        order  : sort.order,
+        prop   : sort.prop
+      })
+      
     }
 
   }
@@ -142,9 +159,14 @@ export default {
 		margin-top: 20px;
 	}
 
-  .block {
+  .btnblock {
     padding: 30px 24px;
     overflow: hidden;
     border-bottom: 1px solid #eff2f6;
+  }
+
+  .main-block .search {
+      padding: 24px;
+      padding-bottom: 0;
   }
 </style>
