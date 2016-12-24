@@ -6,7 +6,7 @@
   优化了监视器组件
   
 ##先看看效果
-![表格效果](http://git.oschina.net/uploads/images/2016/1221/150524_fa731265_45533.jpeg "表格示例")
+![表格效果](http://git.oschina.net/uploads/images/2016/1224/083631_6b448b48_45533.jpeg "表格示例")
 ![表单效果](http://git.oschina.net/uploads/images/2016/1221/150557_9ba5805b_45533.jpeg "表单示例")
 
 ## 使用方法
