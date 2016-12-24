@@ -1,7 +1,10 @@
 #EleAdmin
 
 使用饿了么前端搭建的可配置化后台
-
+2016/12/24 
+  表格组件新增本地排序、服务器排序、搜索表单配置项
+  优化了监视器组件
+  
 ##先看看效果
 ![表格效果](http://git.oschina.net/uploads/images/2016/1221/150524_fa731265_45533.jpeg "表格示例")
 ![表单效果](http://git.oschina.net/uploads/images/2016/1221/150557_9ba5805b_45533.jpeg "表单示例")
@@ -15,8 +18,8 @@
  window.bench     = "/hello.txt";
 ```
 数据结构如下
-```json
-{
+```javascript
+return {
   "title":"JPHP-ELEMENT管理后台", //后台标题
   "menus": [ // 菜单列表
         {
@@ -40,9 +43,9 @@
 ```
 ### 表格结构
 点击菜单后，系统会根据路由信息读取数据，从而决定如何渲染页面
-```json
+```javascript
 
-{
+return {
   "mate" : {//渲染定义
     "columns" : [//列定义
       {
@@ -80,6 +83,10 @@
             "useId" : 0 
         }//,{}
     ],
+    "search" : {
+        "inline" : true //,其他参考form配置
+       
+    },
     "page"  : 1, //当前页
     "total" : 40  // 数据总条数
   },
@@ -88,9 +95,9 @@
 }
 ```
 ###表单结构
-```json
+```javascript
 
-{
+return {
   "mate" : {
     "values": {//默认值
         "name": ""//,...
