@@ -135,6 +135,25 @@ return {
 
 ```
 
+###数据校验
+```javascript
+return {
+    //...
+    "rules": {
+        "pass": [
+          { "validator": "validatePass", "trigger": "blur" }
+        ],
+        "checkPass": [
+          { "validator": "validatePass2", "trigger": "blur" }
+        ],
+        "onlyOne":[
+          { "validator": "validateAsync", "trigger": "blur","url":"/data/only.php" }
+        ]
+      }
+     //,...
+}
+```
+
 ##使用方法
 
 git clone git@git.oschina.net:bfgdqch/EleAdmin.git
