@@ -35,6 +35,9 @@
         ],
         "checkPass": [
           { "validator": "validatePass2", "trigger": "blur" }
+        ],
+        "onlyOne":[
+          { "validator": "validateAsync", "trigger": "blur","url":"/data/only.php" }
         ]
       },
       "labelWidth" :"100px"
