@@ -1,8 +1,11 @@
 <template>
-	<el-form  :model="mate.values" :inline="mate.inline" :rules="mate.rules" ref="ruleForm" :label-width="labelWidth">
+	<el-form  :model="mate.values" :inline="mate.inline" :rules="rules" ref="ruleForm" :label-width="labelWidth">
 	  <template v-for="field of mate.fields">
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'text'">
 	      <el-input v-model="mate.values[field.name]" :placeholder="field.placeholder"></el-input>
+	    </el-form-item>
+	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'password'">
+    		<el-input type="password" v-model="mate.values[field.name]" auto-complete="off"></el-input>
 	    </el-form-item>
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'select'">
 	      <el-select v-model="mate.values[field.name]" :placeholder="field.placeholder">
@@ -50,6 +53,9 @@
 import Thelect from './Thelect.vue'
 
 export default {
+	data(){
+		return {}
+	},
 	props: {
 		mate : Object
   },
@@ -66,6 +72,24 @@ export default {
     	}else{
     		return this.mate.labelWidth;
     	}
+    },
+    rules(){
+    	var rs = {};
+    	var vm = this;
+    	var tm1 = this.mate.rules;
+    	for (var index in tm1) {
+    		var r=[];
+    		var tm2 = tm1[index];
+    		for (var i in tm2) {
+    			var nv = tm2[i];
+    			if(nv.validator){
+    				nv.validator = vm[nv.validator];
+    			}
+    			r[i] = nv;
+    		}   
+    	 	rs[index] = r;
+    	}
+    	return rs;
     }
   },
   methods: {
@@ -113,6 +137,38 @@ export default {
     			});
           return false;
         }
+      });
+    },
+    validatePass(rule, value, callback){
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+      	//console.log(this.$refs.ruleForm.model.checkPass);
+        //if (this.$refs.ruleForm.model.checkPass !== '') {
+        //  this.$refs.ruleForm.validateField('checkPass');
+        //}
+        callback();
+      }
+    },
+    validatePass2(rule, value, callback){
+    	//console.log(value);
+    	//console.log(this.ruleForm);
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.mate.values.pass) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    },
+    validateAsync(rule,value,callback){
+      this.$http.get(
+        rule.url,
+        value
+      ).then(function(data){
+        callback(null);
+      },function(error){
+        callback(new Error(error))
       });
     }
   }

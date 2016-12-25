@@ -9,7 +9,7 @@
 				},{
 					"index" : "2",  "title" : "栏目BB","url":"/form.txt"
 				},{
-					"index" : "3",  "title" : "栏目CC","url":"/table.txt"
+					"index" : "3",  "title" : "栏目CC","url":"/user.txt"
 				}
 			]
 		},{

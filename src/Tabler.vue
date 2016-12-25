@@ -10,7 +10,7 @@
       </div>
     </el-row>
     <el-row><el-col :span="24">
-      <el-table :data="mate.rows" border  @selection-change="handleSelectionChange" @sort-change="sortChange">
+      <el-table :data="mate.rows" border  @selection-change="handleSelectionChange" @sort-change="sortChange" style="width: 100%">
           <el-table-column type="selection" width="50"></el-table-column>
           <el-table-column v-for="col of mate.columns" :label="col.label" :prop="col.name" :width="col.width" :sortable="col.sortable"></el-table-column>
           <el-table-column :context="_self" inline-template label="操作" width="300">
@@ -86,11 +86,11 @@ export default {
         this.ajaxDate(act.url,{id:id});
       }else if(act.useId === -1){
         let url = act.url;
-        console.log("jumpto"+url);
+        console.log("jumpto:"+url);
         router.push({ query: { url: url }});
       }else{
         let url = act.url+"/id/"+row.id;
-        console.log("jumpto"+url);
+        console.log("jumpto:"+url);
         router.push({ query: { url: url,id:row.id }});
       }
     },
@@ -110,27 +110,22 @@ export default {
       if(url == null){
         url = this.mate.dataApi;
       }
+
+      var vm = this;
     	this.$http.post(url,param).then((response) => {
   			this.$notify.info({
   		    title: '消息',
   		    message: '操作完成'
   		  });
         let data = JSON.parse(response.body);
-        this.rows = data.rows;
-		    // get status
-		    //response.status;
-		    // get status text
-		    //response.statusText;
-		    // get 'Expires' header
-		    //response.headers.get('Expires');
-		    // set data on vm
-		    //this.$set('someData', response.body);
+        vm.mate.rows = data.rows;
 		  }, (response) => {
 		    this.$notify.error({
     		  title: '消息',
     		  message: '刷新数据失败'
     		});
 		  });
+
     },
     sortChange : function(sort){
       console.log(sort.column.label);

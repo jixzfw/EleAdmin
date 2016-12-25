@@ -1,0 +1,44 @@
+{
+  "mate" : {
+    	"values": {
+        "name": "",
+        "pass": "",
+        "checkPass": ""
+      },
+  		"fields" : [
+    		{
+    			"holder"      :"text",
+    			"name"        :"name",
+    			"label"       :"活动名称",
+    			"placeholder" :"请输入活动名称"
+    		},
+        {
+          "holder"      :"password",
+          "name"        :"pass",
+          "label"       :"密码",
+          "placeholder" :"请输入密码"
+        },
+        {
+          "holder"      :"password",
+          "name"        :"checkPass",
+          "label"       :"确认密码",
+          "placeholder" :"请再次输入密码"
+        }
+  	  ],
+  	  "rules": {
+        "name": [
+          { "required": true, "message": "请输入活动名称", "trigger": "blur" },
+          { "min": 3, "max": 5, "message": "长度在 3 到 5 个字符", "trigger": "blur" }
+        ],
+        "pass": [
+          { "validator": "validatePass", "trigger": "blur" }
+        ],
+        "checkPass": [
+          { "validator": "validatePass2", "trigger": "blur" }
+        ]
+      },
+      "labelWidth" :"100px"
+  },
+  "title" : "表单中心",
+  "currentView" : "Formor"
+}
