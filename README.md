@@ -141,10 +141,10 @@ return {
     //...
     "rules": {
         "pass": [
-          { "validator": "validatePass", "trigger": "blur" }
+          { "required": true, "message": "请输入密码", "trigger": "blur" }
         ],
         "checkPass": [
-          { "validator": "validatePass2", "trigger": "blur" }
+          { "validator": "validatePassword", "trigger": "blur","name":"pass","message":"请检查密码"}
         ],
         "onlyOne":[
           { "validator": "validateAsync", "trigger": "blur","url":"/data/only.php" }
