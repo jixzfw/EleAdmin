@@ -9,9 +9,7 @@
 	    </el-form-item>
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'select'">
 	      <el-select v-model="mate.values[field.name]" :placeholder="field.placeholder">
-	        <template v-for="item of field.options">
-	          <el-option :label="item.label" :value="item.value"></el-option>
-	        </template>
+	        <el-option :label="item.label" :value="item.value" v-for="item of field.options"></el-option>
 	      </el-select>
 	    </el-form-item>
 	    <el-form-item  :label="field.label" :prop="field.name" v-if="field.holder == 'date'">
@@ -25,16 +23,12 @@
 	    </el-form-item>
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'checkbox'">
 	      <el-checkbox-group v-model="mate.values[field.name]">
-	        <template v-for="item of field.options">
-	          <el-checkbox :label="item.label" :name="field.name"></el-checkbox>
-	        </template>
+	        <el-checkbox :label="item.label" :name="field.name" v-for="item of field.options"></el-checkbox>
 	      </el-checkbox-group>
 	    </el-form-item>
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'radio'">
 	      <el-radio-group v-model="mate.values[field.name]">
-	        <template v-for="item of field.options">
-	          <el-radio :label="item.label"></el-radio>
-	        </template>
+	        <el-radio :label="item.label" v-for="item of field.options"></el-radio>
 	      </el-radio-group>
 	    </el-form-item>
 	    <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'textarea'">
@@ -76,12 +70,12 @@ export default {
     rules(){
     	var rs = {};
     	var vm = this;
-    	var tm1 = this.mate.rules;
-    	for (var index in tm1) {
+    	var rules = this.mate.rules;
+    	for (var index in rules) {
     		var r=[];
-    		var tm2 = tm1[index];
-    		for (var i in tm2) {
-    			var nv = tm2[i];
+    		var rule = rules[index];
+    		for (var i in rule) {
+    			var nv = rule[i];
     			if(nv.validator){
     				nv.validator = vm[nv.validator];
     			}
@@ -89,6 +83,9 @@ export default {
     		}   
     	 	rs[index] = r;
     	}
+    	//console.log("caculate rules!");
+    	//console.log(rs);
+    	//this.mate.rules = rs;
     	return rs;
     }
   },
@@ -139,24 +136,14 @@ export default {
         }
       });
     },
-    validatePass(rule, value, callback){
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else {
-      	//console.log(this.$refs.ruleForm.model.checkPass);
-        //if (this.$refs.ruleForm.model.checkPass !== '') {
-        //  this.$refs.ruleForm.validateField('checkPass');
-        //}
-        callback();
-      }
-    },
-    validatePass2(rule, value, callback){
+    validatePassword(rule, value, callback){
     	//console.log(value);
     	//console.log(this.ruleForm);
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.mate.values.pass) {
-        callback(new Error('两次输入密码不一致!'));
+      // if (value === '') {
+      //   callback(new Error('请再次输入密码'));
+      // } else 
+      if (value !== this.mate.values[rule.name]) {
+        callback(new Error(rule.message||'两次输入密码不一致!'));
       } else {
         callback();
       }
@@ -166,7 +153,12 @@ export default {
         rule.url,
         value
       ).then(function(data){
-        callback(null);
+      	if(data.status){
+      		callback(null);
+      	}else{
+      		callback(new Error(data.error||rule.message||"请修改"))
+      	}
+        
       },function(error){
         callback(new Error(error))
       });
