@@ -48,10 +48,17 @@ import Thelect from './Thelect.vue'
 
 export default {
 	data(){
-		return {}
+		return {
+			defaultValues : {}
+		}
 	},
 	props: {
 		mate : Object
+  },
+  created(){
+  	if(this.mate.inline){
+  		this.defaultValues = this.mate.values;
+  	}
   },
   components: {
     Thelect
@@ -70,10 +77,10 @@ export default {
     rules(){
     	var rs = {};
     	var vm = this;
-    	var rules = this.mate.rules;
-    	for (var index in rules) {
+    	var rls = this.mate.rules;
+    	for (var index in rls) {
     		var r=[];
-    		var rule = rules[index];
+    		var rule = rls[index];
     		for (var i in rule) {
     			var nv = rule[i];
     			if(nv.validator){
@@ -94,12 +101,14 @@ export default {
       this.$refs.ruleForm.resetFields();
     },
     handleSubmit(ev) {
+    	var vm = this;
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          let url    = this.mate.url;
-          let values = this.mate.values;
-          if(this.mate.inline){
-	    		  	this.$emit('ajax',null,values);
+          let url    = vm.mate.url;
+          let values = vm.mate.values;
+          if(vm.mate.inline){
+	    		  	vm.$emit('search',values);
+	    		  	vm.mate.values = vm.defaultValues;
 	    		}else{
 			    	this.$http.post(url,values).then((response) => {
 		    			this.$notify.info({

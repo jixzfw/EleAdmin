@@ -6,7 +6,7 @@
           <el-button v-if="btn.disabled" :plain="true" :type="btn.type" @click="handleAction(btn)" :disabled="btnDisable">{{btn.label}}</el-button>
           <el-button v-else :plain="true" :type="btn.type" @click="handleAction(btn)">{{btn.label}}</el-button>
         </el-col>
-        <el-col :span="18"><Formor :mate="mate.search" v-if="mate.search" v-on:ajax="ajaxDate"></Formor></el-col>
+        <el-col :span="18"><Formor :mate="mate.search" v-if="mate.search" v-on:search="search"></Formor></el-col>
       </div>
     </el-row>
     <el-row><el-col :span="24">
@@ -52,7 +52,10 @@ export default {
     return {
       multipleSelection: [],
       btnDisable:true,
-      btnAction:"run"
+      btnAction:"run",
+      searchValues : {},
+      page         : 0,
+      sortValues   : {}
     }
   },
   watch: {
@@ -66,8 +69,8 @@ export default {
       this.multipleSelection = val;
     },
     handleCurrentChange(val) {
-      let url = this.mate.dataApi+"/page/"+val;
-      this.ajaxDate(url);
+      this.page = val;
+      this.ajaxDate();
     },
     handleAction(act,row={}) {
       var vm = this;
@@ -106,10 +109,16 @@ export default {
         });          
       });
     },
-    ajaxDate(url,param={}){
-      if(url == null){
+    ajaxDate(url=null,param=null){
+      if(url === null){
         url = this.mate.dataApi;
       }
+      if(param === null){
+        param = Object.assign(this.searchValues, {page:this.page}, this.sortValues);
+      }
+
+      console.log(url);
+      console.log(param);
 
       var vm = this;
     	this.$http.post(url,param).then((response) => {
@@ -128,14 +137,18 @@ export default {
 
     },
     sortChange : function(sort){
-      console.log(sort.column.label);
-      console.log(sort.prop);
-      this.ajaxDate(null,{
-        column : sort.column.lable,
+      this.sortValues = {
+        //column : sort.column.lable,
         order  : sort.order,
-        prop   : sort.prop
-      })
-      
+        column   : sort.prop
+      };
+      this.ajaxDate();
+    },
+    search(data){
+      this.searchValues = data;
+      this.ajaxDate();
+      this.page = 0;
+      //this.searchValues = {};
     }
 
   }
