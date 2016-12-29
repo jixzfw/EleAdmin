@@ -10,8 +10,8 @@
   "dependencies": {
     "element-ui": "^1.0.0",
     "vue": "^2.0.5",
-    "vue-router":"^2.1.0",
-    "vue-resource":"^1.0.3"
+    "vue-router": "^2.1.0",
+    "vue-resource": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -21,8 +21,9 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "style-loader": "^0.13.1",
-    "vue-loader": "^9.8.0",
-    "webpack": "beta",
-    "webpack-dev-server": "beta"
+    "vue-template-compiler":"^2.0.0",
+    "vue-loader": "^10.0.2",
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^2.2.0-rc.0"
   }
 }
