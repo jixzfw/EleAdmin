@@ -18,7 +18,7 @@
         			<el-button v-for="act of mate.actions"
         				size="small"
         				:type="act.type"
-        				@click="handleAction(act,row)">
+        				@click="handleAction(act,scope.row)">
         				{{act.label}}
         			</el-button>
       			</template>
@@ -124,7 +124,7 @@ export default {
 			this.$http.post(url,param).then((response) => {
 				let data = JSON.parse(response.body);
 
-				if(data.status && number(data.status) < 0){
+				if(data.status && Number(data.status) < 0){
 					this.$notify.warning({
 						title: '注意',
 						message: status.message||'操作失败'
