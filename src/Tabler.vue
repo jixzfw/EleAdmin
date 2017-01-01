@@ -31,7 +31,8 @@
 						@current-change="handleCurrentChange"
 						:current-page="mate.page"
 						layout="total,prev, pager, next"
-						:total="mate.total">
+						:total="mate.total"
+						:page-size ="mate.size">
 				</el-pagination>
 			</el-col>
 		</el-row>
@@ -70,7 +71,7 @@ export default {
 		},
 		handleCurrentChange(val) {
 			this.page = val;
-			this.ajaxDate();
+			this.getDate();
 		},
 		handleAction(act,row={}) {
 			var vm = this;
@@ -87,6 +88,7 @@ export default {
 				let id = (act.useId === 0)?row.id:this.multipleSelection.map((row) => row.id);
 				console.log("api:"+act.url+";id:"+id);
 				this.ajaxDate(act.url,{id:id});
+				this.getDate();
 			}else if(act.useId === -1){
 				let url = act.url;
 				console.log("jumpto:"+url);
@@ -109,16 +111,10 @@ export default {
 				});          
 			});
 		},
-		ajaxDate(url=null,param=null){
+		ajaxDate(url=null,param={}){
 			if(url === null){
 				url = this.mate.dataApi;
 			}
-			if(param === null){
-				param = Object.assign(this.searchValues, {page:this.page}, this.sortValues);
-			}
-
-			//console.log(url);
-			//console.log(param);
 
 			var vm = this;
 			this.$http.post(url,param).then((response) => {
@@ -134,10 +130,7 @@ export default {
 						title: '消息',
 						message: status.message||'操作完成'
 					});
-					
-					vm.mate.rows = data.rows;
 				}
-				
 			}, (response) => {
 				this.$notify.error({
 					title: '消息',
@@ -146,18 +139,41 @@ export default {
 			});
 
 		},
+		getDate(){
+			let url = this.mate.dataApi;
+			
+			let param = {
+				search : this.searchValues,
+				page   : this.page,
+				sort   : this.sortValues
+			};
+
+			var vm = this;
+			this.$http.post(url,param).then((response) => {
+				let data = JSON.parse(response.body);
+
+				if(data.status && Number(data.status) > 0){
+					vm.mate.rows  = data.rows;
+					vm.mate.total = data.total;
+				}
+			}, (response) => {
+				//
+			});
+
+		},
 		sortChange : function(sort){
+			//console.log(sort.column.id);
 			this.sortValues = {
 				//column : sort.column.lable,
 				order  : sort.order,
-				column   : sort.prop
+				column : sort.prop
 			};
-			this.ajaxDate();
+			this.getDate();
 		},
 		search(data){
 			this.searchValues = data;
-			this.ajaxDate();
 			this.page = 0;
+			this.getDate();
 			//this.searchValues = {};
 		}
 
