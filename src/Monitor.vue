@@ -33,7 +33,18 @@ export default {
 	  	let url = this.$route.query.url;
 	  	this.$http.get(url).then((response) => {
 	    		let data = JSON.parse(response.body);
+          data.mate.view = data.currentView;
+          if(data.currentView == "Treer"){
+            data.currentView = "Tabler";
+            data.mate.view = "KTreer";
+          }else {
+            if(data.currentView == "Tabler"){
+              data.mate.view = "KTable";
+            }
+          }
+          
 	    		this.infomation = data;
+          
           this.$emit('update',data.title);
 	      }, (response) => {
 	    	    // error callback

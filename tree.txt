@@ -1,0 +1,105 @@
+{
+  "mate" : {
+    "rows": [
+        {
+          "id"   : 1, 
+          "label": "一级 1",
+          "children": [{
+            "id"   : 11,
+            "label": "二级 1-1",
+            "status":1
+          }],
+          "status":1,
+          "num" : 12
+        },
+        {
+          "id"   : 2,
+          "label": "一级 2",
+          "children": [{
+            "id"   : 21,
+            "label": "二级 2-1",
+            "status":1,
+            "num" : 0
+          }, {
+            "id"   : 22,
+            "label": "二级 2-2",
+            "status":0,
+            "num" : 0
+          }],
+          "status":1,
+          "num" : 0
+        },
+        {
+          "id"   : 3,
+          "label": "一级 3",
+          "children": [{
+            "id"   : 31,
+            "label": "二级 3-1",
+            "status":0,
+            "num" : 12
+          }, {
+            "id"   : 32,
+            "label": "二级 3-2",
+            "status":1,
+            "num" : 0
+          }],
+          "status":1,
+          "num" : 12
+        }
+    ],
+    "btns" :[
+      {
+        "action"   : "add",
+        "url"      : "/form.txt",
+        "label"    : "增加顶级栏目",
+        "type"     : "success",
+        "isApi"    : false,
+        "useId"    : -1,
+        "disabled" : false
+      }
+    ],
+    "actions":[
+      {
+        "action"   :"add",
+        "url"      : "/form.txt",
+        "label"    : "增加",
+        "type"     : "success",
+        "isApi"    : false,
+        "useid"    : 0
+      },
+      {
+        "action"    :"edit",
+        "url"       : "/form.txt",
+        "label"     : "修改",
+        "type"      : "primary",
+        "isApi"     : false,
+        "useid"     : 0
+      },
+      {
+        "action"   :"disable",
+        "label"    : ["禁用导航","启用导航"],
+        "urls"     : ["/form1.txt","/form2.txt"],
+        "type"     : ["warning","success"],
+        "isApi"    : true,
+        "useid"    : 0,
+        "switch"   : true,
+        "switchKey": "status"
+      },
+      {
+        "action"   :"delete",
+        "confirm"  : {
+          "msg"    : "确定删除选中数据？"
+        },
+        "label"    : "删除",
+        "url"      : "/form.txt",
+        "type"     : "danger",
+        "isApi"    : true,
+        "useid"    : 0,
+        "disable"  : true,
+        "disKey"   : "num"
+      }
+    ]
+  },
+  "title" : "树状表格中心",
+  "currentView" : "Treer"
+}

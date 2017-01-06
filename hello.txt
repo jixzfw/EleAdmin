@@ -16,7 +16,7 @@
 			"index" : "2",  "title" : "栏目管理",
 			"submenus" : [
 				{
-					"index" : "1",  "title" : "增加栏目"
+					"index" : "1",  "title" : "增加栏目","url":"/tree.txt"
 				},{
 					"index" : "2",  "title" : "栏目设置"
 				}
