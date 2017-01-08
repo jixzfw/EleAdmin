@@ -21,48 +21,61 @@
     	  "id":1,
         "date": "2016-05-03",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
       }, {
         "id":2,
         "date": "2016-05-02",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : true
       }, {
         "id":3,
         "date": "2016-05-04",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 0,
+        "close"  : false
       }, {
         "id":4,
         "date": "2016-05-01",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
       }, {
         "id":5,
         "date": "2016-05-08",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 0,
+        "close"  : true
       }, {
         "id":6,
         "date": "2016-05-06",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
       }, {
         "id":7,
         "date": "2016-05-07",
         "name": "王小虎",
-        "address": "上海市普陀区金沙江路 1518 弄"
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
       }
     ],
     "btns" :[
     	{
-    		"action":"add",
+    		"action"   : "add",
     		"url"      : "/form.txt",
     		"label"    : "增加元素",
     		"type"     : "success",
     		"isApi"    : false,
-    		"useId"    : -1,
-    		"disabled" : false
+    		"useId"    : -1
     	},
     	{
     		"action"   :"disableSelected",
@@ -71,7 +84,7 @@
     		"type"     : "warning",
     		"isApi"    : true,
     		"useId"    : 1,
-    		"disabled" : true
+    		"isSelector" : true
     	},
     	{
     		"action"   :"deleteSelected",
@@ -83,7 +96,7 @@
     		"type"     : "danger",
     		"isApi"    : true,
     		"useId"    : 1,
-    		"disabled" : true
+    		"isSelector" : true
     	}
     ],
     "actions" :[
@@ -93,13 +106,17 @@
     		"label" : "修改",
     		"type"  : "success",
     		"isApi" : false,
-    		"useId" : 0
+    		"useId" : 0,
+        "canDisable"   : true,
+        "disableKey"   : "close"
     	},
     	{
     		"action":"disable",
-    		"label" : "禁用",
-    		"url"   : "/form.txt",
-    		"type"  : "warning",
+    		"switch"   : true,
+        "switchKey": "status",
+        "label"    : ["禁用","启用"],
+        "urls"     : ["/formA.txt","/formB.txt"],
+        "type"     : ["warning","primary"],
     		"isApi" : true,
     		"useId" : 0
     	},

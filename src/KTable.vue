@@ -1,20 +1,15 @@
 <template>
-	<Boxer :mate="mate" :btnDisable="btnDisable" @action="handleButton">
+	<Boxer :mate="mate" :hasSelected="hasSelected" @action="handleButton">
 		<span slot="search" style="float:right"><Formor :mate="mate.search" v-if="mate.search" v-on:search="search"></Formor></span>
 		<div slot="main">
 			<el-row>
 				<el-col :span="24">
-					<el-table :data="mate.rows" border  @selection-change="handleSelectionChange" @sort-change="sortChange" @row-click="rowClick" style="width: 100%">
+					<el-table :data="mate.rows" border  @selection-change="handleSelectionChange" @sort-change="sortChange"  style="width: 100%">
 							<el-table-column type="selection" width="50"></el-table-column>
 							<el-table-column v-for="col of mate.columns" :label="col.label" :prop="col.name" :width="col.width" :sortable="col.sortable"></el-table-column>
 							<el-table-column label="操作" width="300">
 								<template scope="scope">
-		        			<el-button v-for="act of mate.actions"
-		        				size="small"
-		        				:type="act.type"
-		        				@click="handleAction(act,scope.row)">
-		        				{{act.label}}
-		        			</el-button>
+		        			<k-btn v-for="act of mate.actions" size="small" :act="act" :row="scope.row" @action="handleAction"></k-btn>
 		      			</template>
 							</el-table-column>
 					</el-table>
@@ -35,10 +30,16 @@
 	</Boxer>
 </template>
 
+
+
 <script>
+
+import KBtn from './KBtn.vue';
+
 export default {
 	components: {
-		Boxer: function index(resolve) {
+		KBtn,
+    Boxer: function index(resolve) {
       require(['./Boxer.vue'], resolve);
     },
 		Formor: function index(resolve) {
@@ -51,7 +52,7 @@ export default {
 	data() {
 		return {
 			multipleSelection: [],
-			btnDisable:true,
+			hasSelected  : false,
 			searchValues : {},
 			page         : 0,
 			sortValues   : {},
@@ -60,7 +61,7 @@ export default {
 	},
 	watch: {
 		multipleSelection: function (newSelection) {
-			this.btnDisable = (newSelection.length == 0);
+			this.hasSelected = (newSelection.length != 0);
 			//this.$emit('btnDisable',this.btnDisable);
 		}
 	},
@@ -77,16 +78,8 @@ export default {
 			this.page = val;
 			this.getData();
 		},
-		handleAction(act) {
-			this.action = act;
-		},
-		rowClick(row, event, column){
-			if(this.action !== null){
-				this.$emit('action',this.action,row);
-				this.action = null;
-			}else{
-				console.log("bangbang");
-			}
+		handleAction(act,row) {
+			this.$emit('action',act,row);
 		},
 		getData(){
 			let url = this.mate.dataApi;
@@ -111,7 +104,6 @@ export default {
 			this.page = 0;
 			this.getData();
 		}
-
 	}
 }
 </script>

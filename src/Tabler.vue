@@ -28,6 +28,9 @@ export default {
 			}
 		},
 		action(act,row){
+			if(act.switch){
+				act.url = act["urls"][row[act.switchKey]];
+			}
 			if(act.isApi){
 				let id = row.id;
 				console.log("api:"+act.url+";id:"+id);

@@ -6,17 +6,14 @@
           <div class="rltv">
             <div class="title tree-head-first">标题</div>
             <el-row class="last">
-              <el-col :span="6" class="title div-center">说明</el-col>
-              <el-col :span="6" class="title div-center">其他</el-col>
+              <el-col v-for="col of mate.columns" :span="col.span" class="title div-center">{{col.label}}</el-col>
               <el-col :span="12" class="title div-center">操作</el-col>
             </el-row>
           </div>
           <div>
             <el-tree :data="mate.rows"
               :props="defaultProps" 
-              @node-click="handleNodeClick" 
-              :render-content='renderContent'
-              show-checkbox>
+              :render-content='renderContent'>
             </el-tree>
           </div>
         </el-col>
@@ -24,9 +21,14 @@
     </div>
   </Boxer>
 </template>
+
 <script>
+
+import KBtn from './KBtn.vue';
+
   export default {
     components: {
+      KBtn,
       Boxer: function index(resolve) {
         require(['./Boxer.vue'], resolve);
       }
@@ -44,76 +46,63 @@
       };
     },
     methods: {
-      handleNodeClick(data) {
-        var btn = currentButton;
-        if(btn.switch){
-            btn.url = btn["urls"][data[btn.switchKey]];
-        }
-        if(btn.action){
-          this.$emit('action',btn,data);
-          currentButton = {};
-        }else{
-          console.log("bangbang");
-        }
-      },
       renderContent: function(h, node) {
         //console.log(node);
         var vm = this;
-
         
         var domBtns   = [];
         //domBtns.push(h('span', node.data.label));
 
         for (var btn of this.mate.actions) {
-          var action = btn.action;
-          var disabled = btn.disable && node.data.status == 0;
-          var label,btnType;
-          if(btn.switch){
-            label   = btn['label'][node['data'][btn.switchKey]];
-            btnType = btn['type'][node['data'][btn.switchKey]];
-          }else{
-            label = btn.label;
-            btnType = btn.type;
-          }
-          domBtns.push(h('el-button',{
-              attrs: {
-                size: 'small'
-              },
+          // var action = btn.action;
+          // var disabled = btn.disable && node.data[btn.disKey];
+          // var label,btnType;
+          // if(btn.switch){
+          //   label   = btn['label'][node['data'][btn.switchKey]];
+          //   btnType = btn['type'][node['data'][btn.switchKey]];
+          // }else{
+          //   label = btn.label;
+          //   btnType = btn.type;
+          // }
+          domBtns.push(h(KBtn,{
               props: {
-                type: btnType,
-                btn : btn,
-                disabled : disabled
+                act : btn,
+                row : node.data,
+                size: "small"
               },
               on: {
-                click: clickHandler.bind(btn)
+                action: vm.handleButton
               }
-          },label));
+          }));
           //domBtns
         }
-        return h('span',[h('span', node.data.label),h('div',{class:{"line-row":true}},
-          [h('el-row',[h('el-col',{props:{span:6}},"-"),h('el-col',{props:{span:6}},"-"),h('el-col',{props:{span:12},class:{"col-tree":true}},domBtns)])]
-        )]);
+
+        var cols = this.mate.columns.map((col)=>{
+        	var value = "--";
+        	if(node.data[col.name] && node.data[col.name]!=""){
+        		value = node.data[col.name];
+        	}
+        	return h('el-col',{props:{span:col.span},class:{"col-tree":true}},value);
+        });
+
+        cols.push(h('el-col',{props:{span:12},class:{"col-tree":true}},domBtns));
+
+        return h('span',[h('span', node.data.label),h('div',{class:{"line-row":true}},cols)]);
+        
       },
-      handleButton(btn){
-        this.$emit('action',btn);
+      handleButton(btn,row){
+        this.$emit('action',btn,row);
       }
     }
   };
-
-  var currentButton = {};
-
-  function clickHandler()
-  {
-    //console.log(this);
-    currentButton = this;
-  }
 </script>
 
 <style>
   .el-tree-node__content {
-    line-height: 52px;
-    height: 52px;
+    line-height: 40px;
+    height: 40px;
     position: relative;
+    border-bottom: 1px solid #e0e6ed;
     
   }
   .line-btn {
@@ -122,16 +111,18 @@
     top        : 10px
   }
   .title {
-    border: 1px solid #e0e6ed;
+    border-bottom: 1px solid #e0e6ed;
+    border-right : 1px solid #e0e6ed; 
     white-space: nowrap;
     overflow: hidden;
     background-color: #EFF2F7;
     text-align: center;
-    height: 52px;
+    height: 40px;
+    line-height: 40px;
     min-width: 0;
     text-overflow: ellipsis;
     box-sizing: border-box;
-    line-height: 52px;
+    
     font-size: 14px;
     color: #1f2d3d;
   }

@@ -1,50 +1,65 @@
 {
   "mate" : {
+    "columns" : [
+      {
+        "label":"排序",
+        "name" :"sort",
+        "span":12
+      }
+    ],
     "rows": [
         {
           "id"   : 1, 
           "label": "一级 1",
+          "sort" : 1,
           "children": [{
             "id"   : 11,
             "label": "二级 1-1",
+            "sort" : 1,
             "status":1
           }],
           "status":1,
-          "num" : 12
+          "num" : false
         },
         {
           "id"   : 2,
           "label": "一级 2",
+          "sort" : 2,
           "children": [{
             "id"   : 21,
             "label": "二级 2-1",
+            "sort" : 1,
             "status":1,
-            "num" : 0
+            "num" : true
           }, {
             "id"   : 22,
             "label": "二级 2-2",
+            "sort" : 2,
             "status":0,
-            "num" : 0
+            "num" : true
           }],
           "status":1,
-          "num" : 0
+          "num" : true
         },
         {
           "id"   : 3,
           "label": "一级 3",
+          "sort" : 3,
           "children": [{
             "id"   : 31,
             "label": "二级 3-1",
+            "sort" : 1,
             "status":0,
-            "num" : 12
+            "num" : false
           }, {
             "id"   : 32,
             "label": "二级 3-2",
+            "sort" : 2,
             "status":1,
-            "num" : 0
+            "num" : true
           }],
           "status":1,
-          "num" : 12
+          "num" : true
         }
     ],
     "btns" :[
@@ -55,7 +70,7 @@
         "type"     : "success",
         "isApi"    : false,
         "useId"    : -1,
-        "disabled" : false
+        "isSelector" : false
       }
     ],
     "actions":[
@@ -95,8 +110,8 @@
         "type"     : "danger",
         "isApi"    : true,
         "useid"    : 0,
-        "disable"  : true,
-        "disKey"   : "num"
+        "canDisable"  : true,
+        "disableKey"   : "num"
       }
     ]
   },

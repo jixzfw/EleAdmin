@@ -2,9 +2,10 @@
 	<div class="box">
 		<el-row>
 			<el-col :span="24">
-				<btns :btns="mate.btns" :btnDisable="btnDisable" @btnClick="handleButton">
-					<span slot="search"><slot name="search"></slot></span>
-				</btns>
+				<div class="btnblock">
+    			<k-btn v-for="btn of mate.btns" :act="btn" :hasSelected="hasSelected" :plain="true" @action="handleButton"></k-btn>
+    			<slot name="search"></slot>
+  			</div>
 			</el-col>
 		</el-row>
 		<slot name="main"></slot>
@@ -14,17 +15,16 @@
 <script>
 export default {
 	components: {
-		Btns : function index(resolve) {
-			require(['./Btns.vue'], resolve);
+		KBtn : function index(resolve) {
+			require(['./KBtn.vue'], resolve);
 		}
 	},
 	props: {
 		mate:Object,
-		btnDisable:Boolean
+		hasSelected:Boolean
 	},
 	methods : {
 		handleButton(btn){
-			console.log(btn);
 			this.$emit('action',btn);
 		}
 	}
