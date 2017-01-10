@@ -108,7 +108,7 @@
     		"isApi" : false,
     		"useId" : 0,
         "canDisable"   : true,
-        "disableKey"   : "close"
+				"disableKey"   : "close"
     	},
     	{
     		"action":"disable",
@@ -178,5 +178,5 @@
     "total"   : 40
   },
   "title": "表格中心",
-  "currentView" : "Tabler"
+  "currentView" : "KTable"
 }

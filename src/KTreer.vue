@@ -91,6 +91,7 @@ import KBtn from './KBtn.vue';
         
       },
       handleButton(btn,row){
+        //console.log(row);
         this.$emit('action',btn,row);
       }
     }

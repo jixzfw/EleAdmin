@@ -116,5 +116,5 @@
     ]
   },
   "title" : "树状表格中心",
-  "currentView" : "Treer"
+  "currentView" : "KTreer"
 }
