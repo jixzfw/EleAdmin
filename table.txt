@@ -173,6 +173,7 @@
       },
       "inline" : true
     },
+    "selected" :[3,5],
     "dataApi" : "/data",
     "page"    : 1,
     "total"   : 40
