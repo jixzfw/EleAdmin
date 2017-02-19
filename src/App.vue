@@ -93,7 +93,7 @@ export default {
       var vm = this
       this.$root.ajaxData(menu.url, {'path': menu.path}, function (data) {
         vm.mate = data.mate
-        vm.view = data.view
+        vm.view = data.view || data.currentView //兼容旧版
         vm.caption = data.title
       })
     },
