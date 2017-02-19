@@ -131,6 +131,9 @@ export default {
       if (data.selected) {
         this.mate.selected = data.selected
       }
+      this.$nextTick(function () {
+        this.rowSelect()
+      })
     },
     sortChange: function (sort) {
       if (!sort || !sort.column || !sort.column.sortable) {

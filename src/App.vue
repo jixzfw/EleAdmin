@@ -71,7 +71,7 @@ export default {
     var vm = this
     this.$nextTick(function () {
       // 获取管理页面框架信息[标题、菜单列表、管理员信息]
-      this.$root.ajaxData(window.bench, {'path': 'hello.txt'}, function (data) {
+      this.$root.ajaxData(window.bench, {}, function (data) {
         vm.title = data.title
         vm.menus = data.menus
         vm.slider = data.menus[0].subMenus
@@ -93,7 +93,7 @@ export default {
       var vm = this
       this.$root.ajaxData(menu.url, {'path': menu.path}, function (data) {
         vm.mate = data.mate
-        vm.view = data.view || data.currentView //兼容旧版
+        vm.view = data.view || data.currentView
         vm.caption = data.title
       })
     },

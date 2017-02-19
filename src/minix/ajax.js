@@ -15,12 +15,13 @@ export default {
       }
 
       let url = act.url
-
+      let vm = this
       // 用于form提交
       if (act.ajax) {
-        this.ajaxData(url, row, function () {
-          if (act.next) { // 操作完成后跳转
-            this.$root.monitor({url: act.next})
+        this.ajaxData(url, row, function (data) {
+          let next = data.next || act.next || false
+          if (next) { // 操作完成后跳转
+            vm.$root.monitor({url: next})
           }
         }, true)
         return
@@ -53,14 +54,13 @@ export default {
     // 仅仅是ajax动作
     ajaxData (url, param = {}, func = null, post = false) {
       console.log('Ajax:' + url)
-      
       let option = {
         method: post ? 'POST' : 'GET',
         url: url
       }
       if (post) {
         option.body = param
-      }else{
+      } else {
         option.params = param
       }
       // var vm = this

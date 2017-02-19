@@ -7,8 +7,7 @@ import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
-
-import App from './App.vue'
+import App from './App'
 
 import Ajaxer from './minix/ajax.js'
 
@@ -22,5 +21,7 @@ new Vue({
   mixins: [
     Ajaxer
   ],
-  render: h => h(App)
+  // router,
+  template: '<App/>',
+  components: { App }
 })

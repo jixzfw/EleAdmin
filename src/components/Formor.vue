@@ -118,10 +118,11 @@ export default {
             vm.mate.values = vm.defaultValues
           } else {
             let act = {url: url, ajax: true}
+            act.next = this.mate.next || false
             // console.log(act);
             // console.log(values.content);
-            this.$root.action(act, values);
-            //vm.$emit('action', act, values)
+            this.$root.action(act, values)
+            // vm.$emit('action', act, values)
           }
         } else {
           this.$notify.error({
