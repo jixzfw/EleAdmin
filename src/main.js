@@ -1,33 +1,26 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import VueResource from 'vue-resource'
-import VueRouter from 'vue-router'
-
 import 'element-ui/lib/theme-default/index.css'
+
+Vue.use(ElementUI)
+Vue.use(VueResource)
+
 import App from './App.vue'
 
-Vue.use(ElementUI);
-Vue.use(VueResource);
-Vue.use(VueRouter);
+import Ajaxer from './minix/ajax.js'
 
-Vue.http.options.emulateJSON = true;
+// import router from './router'
 
-const routes = [
-  {
-    path: '*',
-    component: function index(resolve) {
-      require(['./Monitor.vue'], resolve);
-		}
-	}
-];
+Vue.http.options.emulateJSON = true
 
-const router = new VueRouter({
-    routes // （缩写）相当于 routes: routes
-});
-window.router = router;
-
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  mixins: [
+    Ajaxer
+  ],
   render: h => h(App)
 })

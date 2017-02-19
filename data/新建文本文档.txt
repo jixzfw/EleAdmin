@@ -1,0 +1,4 @@
+sendSubMenus: function (index,path){
+      let i = this.menus.findIndex(v=>v.index==index);
+  		this.slider =  this.menus[i].submenus;
+  	},

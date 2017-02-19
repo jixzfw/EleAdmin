@@ -1,0 +1,73 @@
+{
+  "mate" : {
+    	"values": {
+        "title": "",
+        "category": "",
+        "subject": [],
+        "content": ""
+      },
+  		"fields" : [
+    		{
+    			"holder"      :"text",
+    			"name"        :"title",
+    			"label"       :"文章标题",
+    			"placeholder" :"请输入文章标题"
+    		},
+    		{
+    			"holder"      :"select",
+    			"name"        :"category",
+    			"label"       :"所属栏目",
+    			"placeholder" :"请选择所属栏目",
+    			"options"     :[
+    				{
+    					"label"   :"本地新闻",
+    					"value"   :"shanghai"
+    				},{
+    					"label"   :"全国要闻",
+    					"value"   :"beijing"
+    				}
+    			]
+    		},
+        {
+          "holder"      :"checkbox",
+          "name"        :"subject",
+          "label"       :"挂靠专题",
+          "options"     :[
+            {
+              "label"   :"党的建设",
+              "value"   :"shanghai"
+            },{
+              "label"   :"扶贫攻坚",
+              "value"   :"beijing"
+            },{
+              "label"   :"信息公开",
+              "value"   :"nanjing"
+            },{
+              "label"   :"专题活动",
+              "value"   :"tianjing"
+            }
+          ]
+        },
+        {
+          "holder"      :"editor",
+          "name"        :"content",
+          "label"       :"内容"
+        }
+  	  ],
+  	  "rules": {
+  	    "title": [
+  	      { "required": true, "message": "请输入活动名称", "trigger": "blur" },
+  	      { "min": 3, "max": 20, "message": "长度在 3 到 20 个字符", "trigger": "blur" }
+  	    ],
+  	    "category": [
+  	      { "required": true, "message": "请选择活动区域", "trigger": "change" }
+  	    ],
+  	    "subject": [],
+  	    "content": []
+  	  },
+      "url":"recver.txt",
+      "labelWidth" :"100px"
+  },
+  "title" : "表单中心",
+  "view" : "Formor"
+}

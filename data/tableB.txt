@@ -1,0 +1,183 @@
+﻿{
+  "mate" : {
+    "columns" : [
+      {
+        "label":"姓名",
+        "name" :"name",
+        "width":"120",
+        "sortable" : true
+      },{
+        "label":"生日",
+        "name" :"date",
+        "width":"120",
+        "sortable" : "custom"
+      },{
+        "label":"家庭住址",
+        "name" :"address"
+      }
+    ],
+    "rows"  : [
+      {
+    	  "id":1,
+        "date": "2016-05-03",
+        "name": "王小虎cc",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
+      }, {
+        "id":2,
+        "date": "2016-05-02",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : true
+      }, {
+        "id":3,
+        "date": "2016-05-04",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 0,
+        "close"  : false
+      }, {
+        "id":4,
+        "date": "2016-05-01",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
+      }, {
+        "id":5,
+        "date": "2016-05-08",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 0,
+        "close"  : true
+      }, {
+        "id":6,
+        "date": "2016-05-06",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
+      }, {
+        "id":7,
+        "date": "2016-05-07",
+        "name": "王小虎c",
+        "address": "上海市普陀区金沙江路 1518 弄",
+        "status" : 1,
+        "close"  : false
+      }
+    ],
+    "btns" :[
+    	{
+    		"action"   : "add",
+    		"url"      : "/form.txt",
+    		"label"    : "增加元素",
+    		"type"     : "success",
+    		"isApi"    : false,
+    		"useId"    : -1
+    	},
+    	{
+    		"action"   :"disableSelected",
+    		"label"    : "禁用元素",
+    		"url"      : "/form.txt",
+    		"type"     : "warning",
+    		"isApi"    : true,
+    		"useId"    : 1,
+    		"isSelector" : true
+    	},
+    	{
+    		"action"   :"deleteSelected",
+        "confirm": {
+          "msg" : "确定删除选中数据？"
+        },
+    		"label"    : "删除元素",
+    		"url"      : "/form.txt",
+    		"type"     : "danger",
+    		"isApi"    : true,
+    		"useId"    : 1,
+    		"isSelector" : true
+    	}
+    ],
+    "actions" :[
+    	{
+    		"action":"edit",
+    		"url"   : "/form.txt",
+    		"label" : "修改",
+    		"type"  : "success",
+    		"isApi" : false,
+    		"useId" : 0,
+        "canDisable"   : true,
+				"disableKey"   : "close"
+    	},
+    	{
+    		"action":"disable",
+    		"switch"   : true,
+        "switchKey": "status",
+        "label"    : ["禁用","启用"],
+        "urls"     : ["/formA.txt","/formB.txt"],
+        "type"     : ["warning","primary"],
+    		"isApi" : true,
+    		"useId" : 0
+    	},
+    	{
+    		"action" : "delete",
+        "confirm": {
+          "msg" : "确定删除本条数据？"
+        },
+    		"label"  : "删除",
+    		"url"    : "/form.txt",
+    		"type"   : "danger",
+    		"isApi"  : true,
+    		"useId"  : 0
+    	},
+    	{
+    		"action":"action",
+    		"label" : "绑定",
+    		"url"   : "/form.txt",
+    		"type"  : "primary",
+    		"isApi" : false,
+    		"useId" : 0
+    	}
+    ],
+    "search" : {
+      "values": {
+        "name": "",
+        "region" : ""
+      },
+      "fields" : [
+        {
+          "holder"      :"text",
+          "name"        :"name",
+          "placeholder" :"请输入活动名称"
+        },
+        {
+          "holder"      :"select",
+          "name"        :"region",
+          "placeholder" :"请选择活动区域",
+          "options"     :[
+            {
+              "label"   :"区域一",
+              "value"   :"shanghai"
+            },{
+              "label"   :"区域二",
+              "value"   :"beijing"
+            }
+          ]
+        }
+      ],
+      "rules": {
+        "name": [
+          { "min": 3, "max": 5, "message": "长度在 3 到 5 个字符", "trigger": "blur" }
+        ]
+      },
+      "inline" : true
+    },
+    "selected" :[1,4],
+    "dataApi" : "/tableAA.txt",
+    "page"    : 1,
+    "total"   : 40
+  },
+  "title": "表格中心",
+  "view" : "KTable"
+}
