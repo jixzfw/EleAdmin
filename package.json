@@ -10,8 +10,8 @@
   "dependencies": {
     "element-ui": "^1.0.0",
     "vue": "^2.0.5",
-    "vue-router": "^2.1.0",
-    "vue-resource": "^1.0.3"
+    "vue-resource": "^1.2.1",
+    "wangeditor" : "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

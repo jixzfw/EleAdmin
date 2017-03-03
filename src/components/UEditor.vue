@@ -3,11 +3,12 @@
 </template>
 
 <script>
-window.UEDITOR_HOME_URL = "/statics/ueditor/";
 /* eslint-disable */
-import '../statics/ueditor/ueditor.config.js';
-import '../statics/ueditor/ueditor.all.js';
-import '../statics/ueditor/lang/zh-cn/zh-cn.js';
+ import UE from '../../static/ueditor/ueditor.js'
+/* eslint-disable */
+// import '../../static/ueditor/ueditor.all.js'
+/* eslint-disable */
+// import '../../static/ueditor/lang/zh-cn/zh-cn.js'
 
 //import UE from 'ueditor'
 
@@ -15,42 +16,41 @@ export default {
   props: {
     value: {
       type: String,
-      default: null,
+      default: null
     },
     config: {
       type: Object,
-      default: function(){ return {};},
+      default: function () {return {}}
     }
   },
   watch: {
     value: function value(val, oldVal) {
-      this.editor = UE.getEditor("editor", this.config);
-      if (val !== null) {
-        this.editor.setContent(val);
+      // this.editor = UE.getEditor("editor", this.config);
+      if (this.editor && val !== null) {
+        this.editor.setContent(val)
       }
-    },
+    }
   },
   mounted() {
     this.$nextTick(function f1() {
       // 保证 this.$el 已经插入文档
-      this.editor = UE.getEditor("editor", this.config);
-
-      this.editor.ready(function f2() {
-        this.editor.setContent(this.value);
-
-        this.editor.addListener("contentChange", function () {
-          const wordCount = this.editor.getContentLength(true);
-          const content = this.editor.getContent();
-          const plainTxt = this.editor.getPlainTxt();
-          //this.$emit('input', { wordCount: wordCount, content: content, plainTxt: plainTxt });
-          this.$emit('input', content);
-        }.bind(this));
-
-        this.$emit('ready', this.editor);
-      }.bind(this));
-    });
+      this.editor = UE.getEditor("editor", this.config)
+      window.VueEditor = this
+      window.VueEditor.editor.ready(function f2 () {
+        window.VueEditor.editor.setContent(window.VueEditor.value);
+        window.VueEditor.editor.addListener("contentChange", function () {
+          // const wordCount = this.editor.getContentLength(true);
+          const content = window.VueEditor.editor.getContent()
+          // const plainTxt = this.editor.getPlainTxt();
+          // this.$emit('input', { wordCount: wordCount, content: content, plainTxt: plainTxt });
+          window.VueEditor.$emit('input', content)
+        })
+        // this.$emit('ready', this.editor)
+      })
+    })
   },
   beforeDestroy(){
+  	// delete window.VueEditor
   }
 }
 </script>

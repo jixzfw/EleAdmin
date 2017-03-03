@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(ElementUI)
 Vue.use(VueResource)
+
 import App from './App'
 
 import Ajaxer from './minix/ajax.js'
@@ -16,12 +17,11 @@ import Ajaxer from './minix/ajax.js'
 Vue.http.options.emulateJSON = true
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
+window.app = new Vue({
+	el: '#app',
   mixins: [
     Ajaxer
   ],
-  // router,
-  template: '<App/>',
+  template:'<App/>',
   components: { App }
 })

@@ -14,11 +14,10 @@ export default {
         act.url = act['urls'][Number(row[act.switchKey])]
       }
 
-      let url = act.url
       let vm = this
       // 用于form提交
       if (act.ajax) {
-        this.ajaxData(url, row, function (data) {
+        this.ajaxData(act.url, row, function (data) {
           let next = data.next || act.next || false
           if (next) { // 操作完成后跳转
             vm.$root.monitor({url: next})
@@ -29,15 +28,17 @@ export default {
 
       // 用于在线按钮
       if (act.isApi) {
-        this.ajaxData(url, {id: row.id}, func)
+        this.ajaxData(act.url, {id: row.id}, func)
         return
       }
 
+      let url = act.url
       // 带id跳转
       if (act.useId !== -1) {
-        url = url + '/id/' + row.id
+        let path = act.key || 'id'
+        url = url + '/' + path + '/' + row.id
       }
-      this.$root.monitor({url: act.url})
+      this.$root.monitor({url: url})
     },
     handleConfirm (config, func) {
       this.$confirm(config.msg, '提示', {

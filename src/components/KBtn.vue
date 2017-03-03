@@ -1,7 +1,7 @@
 <template>
   <el-button :size="size" :disabled="btnDisable"
     :type="getSwitchValue('type')"
-    @click="handleAction()" 
+    @click="handleAction" 
     :plain="plain">
     {{getSwitchValue('label')}}
   </el-button>

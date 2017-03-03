@@ -174,7 +174,7 @@
       "inline" : true
     },
     "selected" :[1,4],
-    "dataApi" : "/tableAA.txt",
+    "dataApi" : "/data/tableAA.txt",
     "page"    : 1,
     "total"   : 40
   },

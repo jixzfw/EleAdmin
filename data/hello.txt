@@ -2,39 +2,19 @@
   "title":"管理后台",
 	"menus": [
 		{
-			"index" : "UserCenter",  "title" : "系统中心",
-			"subMenus" : [
-				{
-					"index" : "User", "title" : "用户管理", "url":"http://www.j.com/debug.php/UserCenter/User/index"
-				},{
-					"index" : "Role", "title" : "角色管理", "url":"http://www.j.com/debug.php/UserCenter/Role/index"
-				},{
-					"index" : "Resource", "title" : "权限管理", "url":"http://www.j.com/debug.php/UserCenter/Resource/index"
-				}
-			]
-		},{
 			"index" : "Form",  "title" : "文章中心",
 			"subMenus" : [
 				{
-					"index" : "AA",  "title" : "我的文章", "url":"http://www.j.com/debug.php/article/my"
-				},
-				{
-					"index" : "AB",  "title" : "栏目文章", "url":"http://www.j.com/debug.php/article/department"
-				},
-				{
-					"index" : "CC",  "title" : "文章管理", "url":"http://www.j.com/debug.php/article/admin"
-				},
-				{
-					"index" : "DD",  "title" : "栏目管理", "url":"http://www.j.com/debug.php/article/category"
-				},
-				{
-					"index" : "EE",  "title" : "栏目增加", "path":"","url":"/data/form.txt"
+					"index" : "EE",  "title" : "表单", "path":"","url":"/data/form.txt"
 				},
 				{
 					"index" : "FF",  "title" : "栏目列表", "path":"","url":"/data/tableA.txt"
 				},
 				{
 					"index" : "GG",  "title" : "栏目列表", "path":"","url":"/data/tableB.txt"
+				},
+				{
+					"index" : "TT",  "title" : "树状列表", "path":"","url":"/data/treeAA.txt"
 				}
 			]
 		}

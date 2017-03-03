@@ -80,10 +80,13 @@ export default {
       return h('span', [h('span', node.data.label), h('div', {class: {'line-row': true}}, cols)])
     },
     getData () {
-      this.$emit('getData', this.mate.dataApi)
+      this.$root.ajaxData(this.mate.dataApi)
     },
     handleButton (btn, row) {
-      this.$emit('action', btn, row)
+      var vm = this
+      this.$root.action(btn, row, function () {
+        vm.getData()
+      })
     }
   }
 }

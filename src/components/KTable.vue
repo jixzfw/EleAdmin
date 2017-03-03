@@ -84,12 +84,14 @@ export default {
   // 需要添加刷新消息
   methods: {
     handleButton (btn) {
-      let row = (btn.isApi) ? {id: this.multipleSelection.map((r) => r.id)} : {}
+      let row = (btn.isApi || btn.ajax) ? {id: this.multipleSelection.map((r) => r.id)} : {}
       this.$root.handleAction(btn, row)
     },
     rowSelect () {
       this.mate.rows.forEach(row => {
-        let select = (row.id && this.mate.selected && this.mate.selected.findIndex(id => id === row.id) !== -1)
+        /* eslint-disable */
+        let select = (row.id && this.mate.selected && this.mate.selected.findIndex(id => id == row.id) !== -1)
+        /* eslint-enable */
         this.$refs.table.toggleRowSelection(row, (select === true))
       })
       // this.mate.selected = [];

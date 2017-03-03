@@ -34,7 +34,14 @@
       <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'textarea'">
         <el-input type="textarea" v-model="mate.values[field.name]"></el-input>
       </el-form-item>
-      
+      <el-form-item :label="field.label" :prop="field.name" v-if="field.holder == 'cascader'">
+        <k-cascader
+          :options="field.options"
+          v-model="mate.values[field.name]"
+          >
+        </k-cascader>
+      </el-form-item>
+      <w-editor v-if="field.holder == 'editor'" v-model="mate.values[field.name]"></w-editor>
     </template>
     <el-form-item>
       <el-button type="primary" @click="handleSubmit">提交</el-button>
@@ -62,11 +69,14 @@ export default {
     }
   },
   components: {
-    // 'w-editor': function index(resolve) {
-    //  require(['./WEditor.vue'], resolve);
-    // },
-    // 'u-editor': function index(resolve) {
-    //   require(['./UEditor.vue'], resolve);
+    'w-editor': function index (resolve) {
+      require(['./WEditor.vue'], resolve)
+    },
+    KCascader: function index (resolve) {
+      require(['./KCascader.vue'], resolve)
+    },
+    // 'u-editor': function index (resolve) {
+    //   require(['./UEditor.vue'], resolve)
     // },
     Thelect
   },
@@ -158,6 +168,13 @@ export default {
       }, function (error) {
         callback(new Error(error))
       })
+    },
+    validateCascader (rule, value, callback) {
+      if (value.length < 1) {
+        callback(new Error(rule.message || '请选择'))
+      } else {
+        callback()
+      }
     }
   }
 }
