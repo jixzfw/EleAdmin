@@ -2,6 +2,10 @@
 
 使用饿了么前端搭建的可配置化后台，[手册在这里](http://www.kancloud.cn/jixzfw/ele_admin)。
 
+2017/3/3
+  加入了wangEditor，支持富文本
+  加入了cascader，不过Element的cascader有bug
+
 2017/2/19
   一个全新高效的版本，更流畅，更快捷，更好理解
   currentView参数名称修改为view
